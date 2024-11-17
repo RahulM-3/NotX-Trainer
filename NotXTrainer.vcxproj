@@ -169,6 +169,8 @@
     <ClInclude Include="Resources\Includes\RedHook.h" />
     <ClInclude Include="Source\InputsManager\InputsManager.h" />
     <ClInclude Include="Source\Application\Application.h" />
+    <ClInclude Include="Source\Application\menu.h" />
+    <ClInclude Include="Source\Application\util.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

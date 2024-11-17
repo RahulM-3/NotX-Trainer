@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include <unordered_map>
 
 #include <RedHook.h>
 
@@ -25,7 +25,6 @@
 #include "Source/InputsManager/InputsManager.h"
 
 #include "Source/Application/Application.h"
-
 
 
 #endif
