@@ -1,9 +1,5 @@
 #include <pch.h>
-
-// Debug logs
-#include <fstream>
-std::ofstream logfile("debug.log");
-
+#include "menu.h"
 
 
 void Application::Initialize(HMODULE _Module)
@@ -14,6 +10,17 @@ void Application::Initialize(HMODULE _Module)
 	{
 			// Global Variable
 			bool menuActive = false;
+			Menu menu("                             NotX Trainer");
+			menuoptions submenu = {
+						{"option1", MenuType::TOGGLE},
+						{"option2", MenuType::TOGGLE},
+						{"option3", MenuType::TOGGLE},
+						{"option4", MenuType::TOGGLE},
+			};
+
+			menu.add_parent_option("Player", submenu);
+			menu.add_parent_option("Teleport", submenu);
+			menu.add_parent_option("Spawner", submenu);
 
 			while (true)
 			{
@@ -24,34 +31,24 @@ void Application::Initialize(HMODULE _Module)
 					menuActive = !menuActive;
 					if (menuActive)
 					{
-						_PRINT_HELP(
-							"<red>NotX Trainer\n"
-							"<purple>>Player\n"
-							"<blue>Teleport\n"
-							"<blue>Spawner\n",
-							10000.0f, true, 1, 0, 0, 0, 0
-						);
+						menu.update();
 					}
 					else
 					{
-						HUD_CLEAR_HELP_QUEUE();
+						menu.deactivate();
 					}
 				}
-				
-				// Enter Player options (test)
-				if (menuActive && Input::IsKeyJustPressed(KEY_ENTER))
-				{
-					HUD_CLEAR_HELP_QUEUE();
-					_PRINT_HELP(
-						"<red>NotX Trainer\n"
-						
-						"<purple>>Invincible: " 
-						"<red>OFF\n"
 
-						"<blue>drunk: "
-						"<red>OFF\n",
-						10000.0f, true, 1, 0, 0, 0, 0
-					);
+				// Go to Next Option
+				if (menuActive && Input::IsKeyJustPressed(KEY_NUMPAD_2))
+				{
+					menu.next_option();
+				}
+
+				// Go to Prev Option
+				if (menuActive && Input::IsKeyJustPressed(KEY_NUMPAD_8))
+				{
+					menu.prev_option();
 				}
 
 				logfile.flush();
